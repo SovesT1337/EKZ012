@@ -18,7 +18,7 @@ struct Sotr{
 };
 
 struct ListItem{
-    Sotr sotr;
+    Sotr sot;
     ListItem *pNext, *pPred;
 };
 
@@ -44,7 +44,7 @@ void add_in_list(List & list, ListItem *p){
 void print(List list){
     ListItem *p = list.pFirst;
     do{
-        cout << endl << p->sotr.name;
+        cout << endl << p->sot.name;
         p = p->pNext;
     } while (p != list.pFirst);
 }
@@ -65,6 +65,7 @@ void vvod(const string &file){
     }
     ofstream myfile;
     myfile.open(file);
+    myfile << n << endl;
     for (int i = 0; i < n; i++){
         myfile << sotr[i].name << endl;
         myfile << sotr[i].date << endl;
@@ -78,15 +79,16 @@ void vivod(string file){
     ifstream myFile;
     myFile.open(file);
     vector<Sotr> sotr;
-    int i = 0;
-    while (!myFile.eof()){
+    int n;
+    myFile >> n;
+    myFile.ignore();
+    for (int i = 0; i < n; i++){
         sotr.resize(i + 1);
         getline(myFile, sotr[i].name);
         getline(myFile, sotr[i].date);
         getline(myFile, sotr[i].role);
         myFile >> sotr[i].cash;
         myFile.ignore();
-        i++;
     }
     myFile.close();
 
@@ -108,7 +110,7 @@ void vivod(string file){
     ListItem *p;
 
     for (auto k : sotr){
-        p->sotr = k;
+        p->sot = k;
         add_in_list(l1, p);
     }
 
